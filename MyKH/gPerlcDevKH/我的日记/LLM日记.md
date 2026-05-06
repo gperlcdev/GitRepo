@@ -1,40 +1,40 @@
-我的大模型
+# 我的大模型
 
-一、前言
+## 一、前言
 
-（一）工作内容
+### （一）工作内容
 
 研究一个开源大模型，通过python/pytorch对大模型进行微调。
 
-（二）开发环境
+### （二）开发环境
 
-1.硬件环境
+#### 1.硬件环境
 
 #阿里云轻量应用服务器，2vCPU、4GiB、ESSD 50Gib。
 
 腾讯云轻量应用服务器，2vCPU、2GiB、ESSD 40Gib。
 
-2.软件环境
+#### 2.软件环境
 
 操作系统：Linux
 
 大模型：DeepSeek?Qwen?Gemma?
 
-3.用户
+#### 3.用户
 
 root r00tPass@1981
 
-二、环境搭建
+## 二、环境搭建
 
-（一）创建新用户
+### （一）创建新用户
 
 为方便系统管理，建议创建一个新用户，作为大模型的运行环境。最简单增加用户的方法仅需要两步：
 
-1.增加用户llm
+#### 1.增加用户llm
 
 useradd llm
 
-2.设置密码(11mPass@1981)
+#### 2.设置密码(11mPass@1981)
 
 passwd llm
 
@@ -58,9 +58,9 @@ lcredit=-1 \# 至少1个小写字母
 
 ocredit=-1 \# 至少1个特殊字符
 
-（二）安装基础软件
+### （二）安装基础软件
 
-1.安装ollamma
+#### 1.安装ollamma
 
 小贴士：将指定用户加入sudoer
 
@@ -70,11 +70,11 @@ sudo cat /etc/sudoers
 
 \# 通常情况下CentOS 默认有 %wheel ALL=(ALL) ALL
 
-2.将用户加入到wheel用户组
+#### 2.将用户加入到wheel用户组
 
 sudo usermod -aG wheel llm
 
-3.确认用户所在用户组信息
+#### 3.确认用户所在用户组信息
 
 groups llm
 
@@ -92,7 +92,7 @@ sudo systemctl enabel ollama
 
 #配置ollama服务，可通过其他设备访问
 
-（1）编辑服务配置
+##### （1）编辑服务配置
 
 sudo systemctl edit ollama
 
@@ -102,17 +102,17 @@ sudo systemctl edit ollama
 
 Environment=\"OLLAMA_HOST=0.0.0.0:11434\"
 
-（2）重启服务
+##### （2）重启服务
 
 sudo systemctl daemon-reload
 
 sudo systemctl restart ollama
 
-2.安装pip
+#### 2.安装pip
 
 yum install python3-pip
 
-3.安装open webui
+#### 3.安装open webui
 
 \# 安装 open-webui
 
@@ -122,9 +122,9 @@ pip install open-webui
 
 open-webui serve
 
-4.将open-webui配置为系统服务
+#### 4.将open-webui配置为系统服务
 
-（1）创建服务文件
+##### （1）创建服务文件
 
 sudo nano /etc/systemd/system/open-webui.service
 
@@ -178,7 +178,7 @@ sudo systemctl enable open-webui.service
 
 sudo systemctl start open-webui.service
 
-（2）启动open-webui
+##### （2）启动open-webui
 
 \# 在llm用户下执行，等待一段时间后（5分钟左右），服务即可启动
 
